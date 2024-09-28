@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparkyBudgets</title>
+
+    <style>
+        /* Reset default margin and padding for all elements */
+        body, h1, h2, p, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sets the base font and background color for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8e1; /* Light yellow as background */
+            color: #333;
+        }
+
+        /* Styles the header */
+        header {
+            background-color: #8c1d40; /* ASU Maroon */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Styles the website title */
+        header h1 {
+            color: #ffc627; /* ASU Gold */
+            font-size: 24px;
+            margin-left: 60px; /* Space for the menu button */
+        }
+
+        /* Styles for the dropdown menu button */
+        .menu-button {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #ffc627; /* ASU Gold */
+        }
+
+        /* Dropdown menu container */
+        .dropdown {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            background-color: #8c1d40; /* ASU Maroon */
+            padding: 10px;
+            display: none; /* Hidden by default */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        /* Dropdown menu items */
+        .dropdown a {
+            color: #ffc627; /* ASU Gold */
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .dropdown a:hover {
+            background-color: #4a0e20; /* Darker shade for hover effect */
+        }
+
+        /* Styles the navigation menu */
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            color: #ffc627; /* ASU Gold */
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #4a0e20; /* Darker maroon on hover */
+            border-radius: 4px;
+        }
+
+        /* Styles the profile button */
+        .profile-button {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            background-color: #ffc627; /* ASU Gold */
+            color: #8c1d40; /* ASU Maroon */
+            border: 2px solid #8c1d40;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .profile-button:hover {
+            background-color: #8c1d40;
+            color: #ffc627;
+        }
+
+        /* Main content styling */
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Sections within the main content */
+        section {
+            margin-bottom: 20px;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #4a0e20; /* Darker maroon */
+            color: #ffc627; /* ASU Gold */
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="menu-button" onclick="toggleDropdown()">&#9776;</button>
+        <!-- "Three bars" button for the dropdown menu -->
+
+        <div class="dropdown" id="dropdownMenu">
+            <!-- Dropdown menu items -->
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <h1>SparkyBudgets</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="profile-button" onclick="location.href='#profile';">U</div>
+        <!-- Profile button at the top-right corner -->
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Welcome to SparkyBudgets</h2>
+            <p>This is the home section where you introduce your budgeting website.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Provide some information about yourself or your budgeting services here.</p>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>Detail the budgeting services you offer here.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Provide contact details or a contact form here.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SparkyBudgets. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript function to toggle the dropdown menu visibility
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+
+</html>
