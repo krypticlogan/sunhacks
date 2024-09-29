@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>  <!-- Dynamic title using Jinja -->
+    <title>Financial Advice - BudgetMe</title>  <!-- Dynamic title -->
 
     <!-- Google Fonts Link -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -89,63 +89,88 @@
             color: #00c853;
         }
 
-        /* Profile dropdown menu */
-        .profile-dropdown {
-            position: absolute;
-            top: 50px;
-            right: 0;
-            background-color: #004d40;
-            display: none;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-        }
-
-        .profile-dropdown a {
-            color: #00c853;
-            text-decoration: none;
-            display: block;
-            padding: 5px 0;
-        }
-
-        .profile-dropdown a:hover {
-            background-color: #002b24;
-        }
-
-        /* Centering login form */
-        .login-container {
+        /* Main content styling */
+        main {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1; /* Centering the content vertically */
+            padding: 20px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
         }
 
-        .login-form {
-            background-color: #fff; /* White background for the form */
-            padding: 30px;
+        /* Styles for the left summary section */
+        .summary {
+            background-color: #fff;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px; /* Maximum width for the form */
-            text-align: center;
+            width: 30%; /* Left section width */
         }
 
-        .login-form h2 {
+        .summary h3 {
             color: #004d40; /* Dark green */
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        .login-form input[type="text"],
-        .login-form input[type="password"] {
+        /* Styles for table in the summary */
+        .summary table {
             width: 100%;
+            border-collapse: collapse;
+        }
+
+        .summary th, .summary td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary th {
+            background-color: #f4f8f4; /* Light green background */
+            color: #004d40; /* Dark green text */
+        }
+
+        /* Styles for the chatbot section */
+        .chatbot {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 70%; /* Right section width */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chatbot h3 {
+            color: #004d40; /* Dark green */
+            margin-bottom: 10px;
+        }
+
+        .chatbot-output {
+            flex-grow: 1;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            height: 300px; /* Set a fixed height */
+            overflow-y: auto; /* Allow scrolling */
+        }
+
+        /* Styles for input section */
+        .input-section {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-section input[type="text"] {
+            flex-grow: 1;
             padding: 10px;
-            margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
         }
 
-        .login-form button {
+        .input-section button {
             background-color: #00c853; /* Light green */
             color: #fff;
             padding: 10px 20px;
@@ -154,11 +179,9 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px;
-            width: 100%;
         }
 
-        .login-form button:hover {
+        .input-section button:hover {
             background-color: #004d40; /* Dark green on hover */
         }
     </style>
@@ -185,16 +208,76 @@
         </div>
     </header>
 
-    <div class="login-container">
-        <form class="login-form" method="POST" action="{{ url_for('dashboard') }}">
-            <h2>Login</h2>
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-    </div>
+    <main>
+        <!-- Summary section on the left -->
+        <div class="summary">
+            <h3>Financial Summary</h3>
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td>Balance</td>
+                    <td>$5,000</td>
+                </tr>
+                <tr>
+                    <td>Recent Transaction</td>
+                    <td>-$200 (Groceries)</td>
+                </tr>
+                <tr>
+                    <td>Investment</td>
+                    <td>$1,200</td>
+                </tr>
+                <tr>
+                    <td>Savings Goal</td>
+                    <td>$10,000</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Chatbot section on the right -->
+        <div class="chatbot">
+            <h3>Financial Advice Chatbot</h3>
+            <div class="chatbot-output" id="chatbotOutput">
+                <!-- This is where the AI chatbot's responses will appear -->
+                <p>Welcome! How can I assist with your financial goals today?</p>
+            </div>
+
+            <div class="input-section">
+                <input type="text" id="userInput" placeholder="Type your question here...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </main>
 
     <script>
+        // Function to handle sending a message
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            const chatbotOutput = document.getElementById('chatbotOutput');
+
+            // Display the user's message
+            if (userInput.trim() !== "") {
+                const userMessage = document.createElement('p');
+                userMessage.textContent = "You: " + userInput;
+                userMessage.style.color = "#004d40"; // Dark green for user's text
+                chatbotOutput.appendChild(userMessage);
+
+                // Simulate AI response
+                const botMessage = document.createElement('p');
+                botMessage.textContent = "AI: This is a sample response. Please implement the actual functionality.";
+                botMessage.style.color = "#333";
+                chatbotOutput.appendChild(botMessage);
+
+                // Scroll to the bottom of the chatbot output
+                chatbotOutput.scrollTop = chatbotOutput.scrollHeight;
+
+                // Clear the input
+                document.getElementById('userInput').value = "";
+            }
+        }
+
         // Function to toggle profile dropdown visibility
         function toggleProfileDropdown() {
             const profileDropdown = document.getElementById('profileDropdown');

@@ -4,57 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>  <!-- Dynamic title using Jinja -->
+    <title>{{ title }}</title>
 
     <!-- Google Fonts Link -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* Reset default margin and padding for all elements */
         body, h1, h2, p, ul {
             margin: 0;
             padding: 0;
         }
 
-        /* Sets the base font and background color for the body */
         body {
-            font-family: 'Poppins', sans-serif; /* Using the Poppins font */
-            background-color: #f4f8f4; /* Light green background */
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f8f4;
             color: #333;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensures the body takes full viewport height */
-            font-size: 16px; /* Base font size */
-            line-height: 1.6; /* Improved readability */
+            min-height: 100vh;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
-        /* Styles the header */
         header {
-            background-color: #004d40; /* Dark green */
+            background-color: #004d40;
             padding: 10px 20px;
             display: flex;
-            justify-content: space-between; /* Space elements to left and right */
+            justify-content: space-between;
             align-items: center;
             position: relative;
         }
 
-        /* Styles the website title */
         .logo {
-            color: #00c853; /* Light green */
-            font-size: 24px; /* Font size for the title */
-            font-weight: 600; /* Bold weight for emphasis */
-            text-decoration: none; /* Remove underline */
+            color: #00c853;
+            font-size: 24px;
+            font-weight: 600;
+            text-decoration: none;
         }
 
-        /* Styles for navigation buttons */
         .nav-buttons {
             display: flex;
             gap: 15px;
         }
 
         .nav-buttons a {
-            background-color: #00c853; /* Light green */
-            color: #004d40; /* Dark green */
+            background-color: #00c853;
+            color: #004d40;
             padding: 8px 16px;
             text-decoration: none;
             border-radius: 4px;
@@ -63,15 +58,14 @@
         }
 
         .nav-buttons a:hover {
-            background-color: #004d40; /* Dark green */
-            color: #00c853; /* Light green */
+            background-color: #004d40;
+            color: #00c853;
         }
 
-        /* Styles the profile button */
         .profile-button {
             position: relative;
-            background-color: #00c853; /* Light green */
-            color: #004d40; /* Dark green */
+            background-color: #00c853;
+            color: #004d40;
             border: 2px solid #004d40;
             border-radius: 50%;
             width: 40px;
@@ -89,7 +83,6 @@
             color: #00c853;
         }
 
-        /* Profile dropdown menu */
         .profile-dropdown {
             position: absolute;
             top: 50px;
@@ -112,96 +105,86 @@
             background-color: #002b24;
         }
 
-        /* Centering login form */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1; /* Centering the content vertically */
-        }
-
-        .login-form {
-            background-color: #fff; /* White background for the form */
-            padding: 30px;
-            border-radius: 8px;
+        main {
+            padding: 40px;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px; /* Maximum width for the form */
+            border-radius: 8px;
+            flex-grow: 1;
             text-align: center;
         }
 
-        .login-form h2 {
-            color: #004d40; /* Dark green */
-            margin-bottom: 20px;
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .login-form input[type="text"],
-        .login-form input[type="password"] {
-            width: 100%;
+        input {
             padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
+            border: 1px solid #004d40;
             border-radius: 4px;
             font-size: 16px;
+            width: 100%;
         }
 
-        .login-form button {
-            background-color: #00c853; /* Light green */
-            color: #fff;
-            padding: 10px 20px;
+        button {
+            padding: 10px;
+            background-color: #00c853;
+            color: #004d40;
             border: none;
             border-radius: 4px;
-            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .login-form button:hover {
-            background-color: #004d40; /* Dark green on hover */
+        button:hover {
+            background-color: #004d40;
+            color: #00c853;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <!-- BudgetMe logo -->
         <a href="/" class="logo">BudgetMe</a>
 
-        <!-- Navigation buttons in the center -->
         <div class="nav-buttons">
             <a href="/breakdown">My Breakdown</a>
             <a href="/advice">Financial Advice</a>
         </div>
 
-        <!-- Profile button at the top-right corner -->
         <div class="profile-button" onclick="toggleProfileDropdown()">U</div>
-        
-        <!-- Profile dropdown menu -->
+
         <div class="profile-dropdown" id="profileDropdown">
             <a href="/account">Account</a>
             <a href="/settings">Settings</a>
         </div>
     </header>
 
-    <div class="login-container">
-        <form class="login-form" method="POST" action="{{ url_for('dashboard') }}">
-            <h2>Login</h2>
+    <main>
+        <h2>Create Account</h2>
+        <form method="POST">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <button type="submit">Create Account</button>
         </form>
-    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 BudgetMe. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Function to toggle profile dropdown visibility
         function toggleProfileDropdown() {
             const profileDropdown = document.getElementById('profileDropdown');
             profileDropdown.style.display = profileDropdown.style.display === 'none' || profileDropdown.style.display === '' ? 'block' : 'none';
         }
 
-        // Close the dropdown when clicking outside of it
         window.onclick = function(event) {
             const profileDropdown = document.getElementById('profileDropdown');
             if (!event.target.matches('.profile-button')) {
