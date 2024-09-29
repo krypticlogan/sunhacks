@@ -30,7 +30,7 @@
                     body: JSON.stringify({ accessToken: accessToken })
                 }).then(response => {
     if (response.ok) {
-        window.location.href = '/next-page'; // Redirect after saving the token
+        window.location.href = '/breakdown'; // Redirect after saving the token
     } else {
         console.error('Failed to save token');
     }

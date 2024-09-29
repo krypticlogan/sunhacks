@@ -204,7 +204,7 @@
                 console.log('Access Token:', accessToken);
     
                 // Send access token to backend
-                fetch('/save-token', {
+                fetch('/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
