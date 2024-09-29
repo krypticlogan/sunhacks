@@ -7,12 +7,13 @@ API_KEY = os.getenv('TELLER_API_ID')
 # print(API_KEY)
 url = "https://api.teller.io/accounts"
 
-key_file = os.path("C:/Users/krypt/Downloads/budgetMe.pem")
+cert_file = "C:\\Users\\krypt\\Downloads\\teller\\certificate.pem"
+key_file = "C:\\Users\\krypt\\Downloads\\teller\\private_key.pem"
 headers = {
     'Authorization': f'Basic {API_KEY}:',
 }
 
-response = requests.get(url, headers=headers,cert=key_file)
+response = requests.get(url, headers=headers,cert=(cert_file,key_file))
 
 if response.status_code == 200:
     # Printing the JSON response with account information

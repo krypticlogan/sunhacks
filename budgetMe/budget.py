@@ -10,3 +10,6 @@ def home():
 def breakdown():
     return render_template('analysis.html')
 
+# @app.route("/advice")
+# def breakdown():
+#     return render_template('advice.html')
