@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SparkyBudgets</title>
+    <title>{{ title }}</title>  <!-- Dynamic title using Jinja -->
+
+    <!-- Google Fonts Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         /* Reset default margin and padding for all elements */
@@ -15,91 +18,61 @@
 
         /* Sets the base font and background color for the body */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fff8e1; /* Light yellow as background */
+            font-family: 'Poppins', sans-serif; /* Using the Poppins font */
+            background-color: #f4f8f4; /* Light green background */
             color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures the body takes full viewport height */
+            font-size: 16px; /* Base font size */
+            line-height: 1.6; /* Improved readability */
         }
 
         /* Styles the header */
         header {
-            background-color: #8c1d40; /* ASU Maroon */
+            background-color: #004d40; /* Dark green */
             padding: 10px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Space elements to left and right */
             align-items: center;
             position: relative;
         }
 
         /* Styles the website title */
-        header h1 {
-            color: #ffc627; /* ASU Gold */
-            font-size: 24px;
-            margin-left: 60px; /* Space for the menu button */
+        .logo {
+            color: #00c853; /* Light green */
+            font-size: 24px; /* Font size for the title */
+            font-weight: 600; /* Bold weight for emphasis */
+            text-decoration: none; /* Remove underline */
         }
 
-        /* Styles for the dropdown menu button */
-        .menu-button {
-            position: absolute;
-            left: 20px;
-            top: 10px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: #ffc627; /* ASU Gold */
-        }
-
-        /* Dropdown menu container */
-        .dropdown {
-            position: absolute;
-            top: 40px;
-            left: 20px;
-            background-color: #8c1d40; /* ASU Maroon */
-            padding: 10px;
-            display: none; /* Hidden by default */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-        }
-
-        /* Dropdown menu items */
-        .dropdown a {
-            color: #ffc627; /* ASU Gold */
-            text-decoration: none;
-            display: block;
-            padding: 5px 0;
-        }
-
-        .dropdown a:hover {
-            background-color: #4a0e20; /* Darker shade for hover effect */
-        }
-
-        /* Styles the navigation menu */
-        nav ul {
-            list-style-type: none;
+        /* Styles for navigation buttons */
+        .nav-buttons {
             display: flex;
             gap: 15px;
         }
 
-        nav ul li a {
-            color: #ffc627; /* ASU Gold */
+        .nav-buttons a {
+            background-color: #00c853; /* Light green */
+            color: #004d40; /* Dark green */
+            padding: 8px 16px;
             text-decoration: none;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        nav ul li a:hover {
-            background-color: #4a0e20; /* Darker maroon on hover */
-            border-radius: 4px;
+        .nav-buttons a:hover {
+            background-color: #004d40; /* Dark green */
+            color: #00c853; /* Light green */
         }
 
         /* Styles the profile button */
         .profile-button {
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            background-color: #ffc627; /* ASU Gold */
-            color: #8c1d40; /* ASU Maroon */
-            border: 2px solid #8c1d40;
+            position: relative;
+            background-color: #00c853; /* Light green */
+            color: #004d40; /* Dark green */
+            border: 2px solid #004d40;
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -112,97 +85,140 @@
         }
 
         .profile-button:hover {
-            background-color: #8c1d40;
-            color: #ffc627;
+            background-color: #004d40;
+            color: #00c853;
+        }
+
+        /* Profile dropdown menu */
+        .profile-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #004d40;
+            display: none;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .profile-dropdown a {
+            color: #00c853;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #002b24;
         }
 
         /* Main content styling */
         main {
-            padding: 20px;
+            padding: 40px; /* Increased padding */
             max-width: 900px;
             margin: 20px auto;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            flex-grow: 1; /* Allows the main content to expand */
+            text-align: center; /* Center text */
         }
 
         /* Sections within the main content */
         section {
-            margin-bottom: 20px;
+            margin-bottom: 30px; /* More spacing between sections */
+        }
+
+        section h2 {
+            font-size: 28px; /* Larger heading size */
+            color: #004d40; /* Dark green for contrast */
+            margin-bottom: 10px;
+        }
+
+        section p {
+            font-size: 18px; /* Slightly larger body text */
+            color: #333;
         }
 
         /* Footer styling */
         footer {
-            background-color: #4a0e20; /* Darker maroon */
-            color: #ffc627; /* ASU Gold */
+            background-color: #002b24; /* Darker green */
+            color: #00c853; /* Light green */
             text-align: center;
-            padding: 10px 0;
+            padding: 15px 0; /* Increased padding */
             margin-top: 20px;
+            position: relative;
+            width: 100%;
+            bottom: 0; /* Stick to the bottom */
+            font-size: 16px;
         }
     </style>
 </head>
-
+    
 <body>
     <header>
-        <button class="menu-button" onclick="toggleDropdown()">&#9776;</button>
-        <!-- "Three bars" button for the dropdown menu -->
+        <!-- BudgetMe logo -->
+        <a href="/" class="logo">BudgetMe</a>
 
-        <div class="dropdown" id="dropdownMenu">
-            <!-- Dropdown menu items -->
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
+        <!-- Navigation buttons in the center -->
+        <div class="nav-buttons">
+            <a href="#breakdown">My Breakdown</a>
+            <a href="#advice">Financial Advice</a>
         </div>
 
-        <h1>SparkyBudgets</h1>
-        
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-        <div class="profile-button" onclick="location.href='#profile';">U</div>
         <!-- Profile button at the top-right corner -->
+        <div class="profile-button" onclick="toggleProfileDropdown()">U</div>
+        
+        <!-- Profile dropdown menu -->
+        <div class="profile-dropdown" id="profileDropdown">
+            <a href="#account">Account</a>
+            <a href="#settings">Settings</a>
+        </div>
     </header>
 
     <main>
         <section id="home">
-            <h2>Welcome to SparkyBudgets</h2>
-            <p>SparkyBudgets helps students at ASU </p>
+            <h2>Welcome to BudgetMe</h2>
+            <p>Discover a reliable resource for smart money management! Our website is dedicated to helping you take control of your finances and make every dollar count.</p>
         </section>
 
         <section id="about">
-            <h2>Sales</h2>
-            <p></p>
+            <h2>Stretch Every Dollar</h2>
+            <p>Explore our curated list of discounts, affordable services, and cost-saving tips tailored to your needs. We also connect you with scholarships, grants, and financial aid opportunities to support your financial journey.</p>
         </section>
 
         <section id="services">
             <h2>Create Your Own Budget</h2>
-            <p>SparkyBudgets allows the user to view their balance info, recent transactions, and access valuable insights like investment options and spending recommendations.</p>
+            <p>BudgetMe allows users to view their balance info, recent transactions, and access valuable insights like investment options and spending recommendations.</p>
         </section>
 
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Contact xtschelling@gmail.com for any inquiries</p>
+        <section id="mission">
+            <h2>Mission</h2>
+            <p>We aim to empower you to achieve financial stability and make every dollar count with practical budgeting tools and savvy saving tips.</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 SparkyBudgets. All rights reserved.</p>
+        <p>&copy; 2024 BudgetMe. All rights reserved.</p>
     </footer>
 
     <script>
-        // JavaScript function to toggle the dropdown menu visibility
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdownMenu');
-            dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
+        // Function to toggle profile dropdown visibility
+        function toggleProfileDropdown() {
+            const profileDropdown = document.getElementById('profileDropdown');
+            profileDropdown.style.display = profileDropdown.style.display === 'none' || profileDropdown.style.display === '' ? 'block' : 'none';
+        }
+
+        // Close the dropdown when clicking outside of it
+        window.onclick = function(event) {
+            const profileDropdown = document.getElementById('profileDropdown');
+            if (!event.target.matches('.profile-button')) {
+                if (profileDropdown.style.display === 'block') {
+                    profileDropdown.style.display = 'none';
+                }
+            }
         }
     </script>
 </body>
-
 </html>
+

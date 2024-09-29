@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>  <!-- Dynamic title using Jinja -->
+
+    <!-- Google Fonts Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset default margin and padding for all elements */
+        body, h1, h2, p, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sets the base font and background color for the body */
+        body {
+            font-family: 'Poppins', sans-serif; /* Using the Poppins font */
+            background-color: #f4f8f4; /* Light green background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures the body takes full viewport height */
+            font-size: 16px; /* Base font size */
+            line-height: 1.6; /* Improved readability */
+        }
+
+        /* Styles the header */
+        header {
+            background-color: #004d40; /* Dark green */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between; /* Space elements to left and right */
+            align-items: center;
+            position: relative;
+        }
+
+        /* Styles the website title */
+        .logo {
+            color: #00c853; /* Light green */
+            font-size: 24px; /* Font size for the title */
+            font-weight: 600; /* Bold weight for emphasis */
+            text-decoration: none; /* Remove underline */
+        }
+
+        /* Styles for navigation buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-buttons a {
+            background-color: #00c853; /* Light green */
+            color: #004d40; /* Dark green */
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #004d40; /* Dark green */
+            color: #00c853; /* Light green */
+        }
+
+        /* Styles the profile button */
+        .profile-button {
+            position: relative;
+            background-color: #00c853; /* Light green */
+            color: #004d40; /* Dark green */
+            border: 2px solid #004d40;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .profile-button:hover {
+            background-color: #004d40;
+            color: #00c853;
+        }
+
+        /* Profile dropdown menu */
+        .profile-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #004d40;
+            display: none;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .profile-dropdown a {
+            color: #00c853;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #002b24;
+        }
+
+        /* Main content styling */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap; /* Wrap sections for responsive layout */
+            gap: 20px;
+        }
+
+        /* Section styling */
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(50% - 20px); /* Two columns with a gap */
+            min-width: 300px;
+        }
+
+        .section h3 {
+            color: #004d40; /* Dark green */
+            margin-bottom: 10px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f8f4; /* Light green background */
+            color: #004d40; /* Dark green text */
+        }
+
+        /* Graphical representations (placeholder) */
+        .graph-placeholder {
+            background-color: #f4f8f4;
+            border: 2px dashed #ccc;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        /* Larger graph placeholders */
+        .large-graph {
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- BudgetMe logo -->
+        <a href="/" class="logo">BudgetMe</a>
+
+        <!-- Navigation buttons in the center -->
+        <div class="nav-buttons">
+            <a href="/breakdown">My Breakdown</a>
+            <a href="/advice">Financial Advice</a>
+        </div>
+
+        <!-- Profile button at the top-right corner -->
+        <div class="profile-button" onclick="toggleProfileDropdown()">U</div>
+        
+        <!-- Profile dropdown menu -->
+        <div class="profile-dropdown" id="profileDropdown">
+            <a href="#account">Account</a>
+            <a href="#settings">Settings</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Summary and Insights Section -->
+        <div class="section">
+            <h3>Account Summary</h3>
+            <table>
+                <tr>
+                    <th>Account Info</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Total Balance</td>
+                    <td>$15,000</td>
+                </tr>
+                <tr>
+                    <td>Savings</td>
+                    <td>$5,000</td>
+                </tr>
+                <tr>
+                    <td>Investments</td>
+                    <td>$3,000</td>
+                </tr>
+               
+            </table>
+        </div>
+
+        <!-- Recent Transactions Section -->
+        <div class="section">
+            <h3>Recent Transactions</h3>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+                {for %%}
+                <tr>
+                    <td>01/01/2024</td>
+                    <td>Grocery Store</td>
+                    <td>-$150</td>
+                </tr>
+
+                {endfor}
+                <tr>
+                    <td>01/02/2024</td>
+                    <td>Salary Deposit</td>
+                    <td>$3,000</td>
+                </tr>
+                <tr>
+                    <td>01/03/2024</td>
+                    <td>Gym Membership</td>
+                    <td>-$50</td>
+                </tr>
+                <tr>
+                    <td>01/04/2024</td>
+                    <td>Online Shopping</td>
+                    <td>-$200</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Spending Insights Section -->
+        <div class="section">
+            <h3>Spending Insights</h3>
+            <div class="graph-placeholder">Pie Chart: Category Breakdown</div>
+            <p>This section would show a pie chart of spending across different categories such as Groceries, Utilities, Entertainment, etc.</p>
+        </div>
+
+        <!-- Income vs Expenses Graph Section -->
+        <div class="section">
+            <h3>Income vs Expenses</h3>
+            <div class="graph-placeholder large-graph">Bar Graph: Income vs Expenses</div>
+            <p>A bar graph showing your income vs expenses over time to identify savings opportunities.</p>
+        </div>
+
+        <!-- Investment Analysis Section -->
+        <div class="section">
+            <h3>Investment Analysis</h3>
+            <div class="graph-placeholder">Line Graph: Investment Growth</div>
+            <p>This section provides insights into the growth of your investments over time.</p>
+        </div>
+
+        <!-- Savings Goals Section -->
+        <div class="section">
+            <h3>Savings Goals</h3>
+            <table>
+                <tr>
+                    <th>Goal</th>
+                    <th>Target</th>
+                    <th>Progress</th>
+                </tr>
+                <tr>
+                    <td>Emergency Fund</td>
+                    <td>$5,000</td>
+                    <td>$3,500 (70%)</td>
+                </tr>
+                <tr>
+                    <td>Vacation Fund</td>
+                    <td>$2,000</td>
+                    <td>$1,200 (60%)</td>
+                </tr>
+                <tr>
+                    <td>Car Purchase</td>
+                    <td>$10,000</td>
+                    <td>$4,000 (40%)</
