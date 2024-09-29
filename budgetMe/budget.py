@@ -18,6 +18,9 @@ def advice():
 def login():
     return render_template('login.html')
 
+@app.route("/teller")
+def teller():
+    return render_template('teller.html')
 # @app.route("/advice")
 # def breakdown():
 #     return render_template('advice.html')

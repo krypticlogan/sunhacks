@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teller Connect Example</title>
+    <script src="https://cdn.teller.io/connect/connect.js"></script>
+</head>
+<body>
+    <h1>Connect Your Bank Account</h1>
+    <button onclick="openTellerConnect()">Open Teller Connect</button>
+    <script>
+        // require('dotenv').config();
+        const API_ID = 'app_p4epsc4h1j499fkuv0000';
+        console.log(API_ID);
+        const connectHandler = TellerConnect.setup({
+            applicationId: API_ID, // Replace with your Teller app ID
+            // console.log()
+            environment: 'sandbox', // Use 'production' for live
+            onSuccess: function(auth) {
+                const accessToken = auth.accessToken;
+                console.log('Access Token:', accessToken);
+    
+                // Send access token to backend
+                fetch('/save-token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ accessToken: accessToken })
+                }).then(response => response.json())
+                  .then(data => console.log(data))
+                  .catch(error => console.error('Error:', error));
+            },
+            onExit: function() {
+                console.log('User exited Teller Connect');
+            },
+            onError: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    
+        function openTellerConnect() {
+            connectHandler.open();
+        }
+    </script>
+</body>
+</html>
