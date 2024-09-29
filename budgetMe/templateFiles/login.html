@@ -164,6 +164,9 @@
     </style>
 </head>
 
+<script src="https://cdn.teller.io/connect/connect.js"></script>
+
+
 <body>
     <header>
         <!-- BudgetMe logo -->
@@ -186,12 +189,12 @@
     </header>
 
     <div class="login-container">
-        <form class="login-form" method="POST" action="{{ url_for('dashboard') }}">
-            <h2>Login</h2>
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
+            <!-- <h2>Login</h2> -->
+            <!-- <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required> -->
+            <!-- <button type="submit">Login</button> -->
+            <button type="submit" onclick="openTellerConnect()">Open Teller Connect</button>
+        <!-- </form> -->
     </div>
 
     <script>
@@ -209,6 +212,39 @@
                     profileDropdown.style.display = 'none';
                 }
             }
+        }
+
+        const API_ID = 'app_p4epsc4h1j499fkuv0000';
+        console.log(API_ID);
+        const connectHandler = TellerConnect.setup({
+            applicationId: API_ID, // Replace with your Teller app ID
+            // console.log()
+            environment: 'sandbox', // Use 'production' for live
+            onSuccess: function(auth) {
+                const accessToken = auth.accessToken;
+                console.log('Access Token:', accessToken);
+    
+                // Send access token to backend
+                fetch('/save-token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ accessToken: accessToken })
+                }).then(response => response.json())
+                  .then(data => console.log(data))
+                  .catch(error => console.error('Error:', error));
+            },
+            onExit: function() {
+                console.log('User exited Teller Connect');
+            },
+            onError: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    
+        function openTellerConnect() {
+            connectHandler.open();
         }
     </script>
 </body>
