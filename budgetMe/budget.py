@@ -8,5 +8,13 @@ def home():
 
 @app.route("/breakdown")
 def breakdown():
-    return render_template('analysis.html')
+    return render_template('myBreakdown.html')
+
+@app.route("/advice")
+def breakdown():
+    return render_template('financialAdvice.html')
+
+@app.route("/login")
+def breakdown():
+    return render_template('login.html')
 
