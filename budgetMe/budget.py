@@ -11,10 +11,10 @@ def breakdown():
     return render_template('myBreakdown.html')
 
 @app.route("/advice")
-def breakdown():
+def advice():
     return render_template('financialAdvice.html')
 
 @app.route("/login")
-def breakdown():
+def login():
     return render_template('login.html')
 
