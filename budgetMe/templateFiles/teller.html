@@ -28,12 +28,18 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ accessToken: accessToken })
-                }).then(response => response.json())
-                  .then(data => console.log(data))
-                  .catch(error => console.error('Error:', error));
+                }).then(response => {
+    if (response.ok) {
+        window.location.href = '/next-page'; // Redirect after saving the token
+    } else {
+        console.error('Failed to save token');
+    }
+})
+.catch(error => console.error('Error:', error));
             },
             onExit: function() {
                 console.log('User exited Teller Connect');
+                window.location.replace("1.127.0.0:8000");
             },
             onError: function(error) {
                 console.error('Error:', error);
