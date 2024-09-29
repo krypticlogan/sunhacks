@@ -140,6 +140,25 @@
             color: #333;
         }
 
+        /* Styles for the 'Take me to login' button */
+        .login-button {
+            display: inline-block;
+            background-color: #00c853; /* Light green */
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .login-button:hover {
+            background-color: #004d40; /* Dark green on hover */
+        }
+
         /* Footer styling */
         footer {
             background-color: #002b24; /* Darker green */
@@ -195,6 +214,9 @@
         <section id="mission">
             <h2>Mission</h2>
             <p>We aim to empower you to achieve financial stability and make every dollar count with practical budgeting tools and savvy saving tips.</p>
+
+            <!-- Centered 'Take me to login' button -->
+            <a href="/login" class="login-button">Take me to login</a>
         </section>
     </main>
 
@@ -221,4 +243,3 @@
     </script>
 </body>
 </html>
-

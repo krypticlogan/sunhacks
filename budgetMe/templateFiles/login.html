@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>  <!-- Dynamic title using Jinja -->
+    <title>{{ title }}</title> <!-- Dynamic title using Jinja -->
 
     <!-- Google Fonts Link -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -118,54 +118,37 @@
             justify-content: center;
             align-items: center;
             flex-grow: 1; /* Centering the content vertically */
-        }
-
-        .login-form {
-            background-color: #fff; /* White background for the form */
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px; /* Maximum width for the form */
             text-align: center;
+            flex-direction: column;
         }
 
-        .login-form h2 {
-            color: #004d40; /* Dark green */
+        .login-container h2 {
+            color: #004d40;
             margin-bottom: 20px;
+            font-size: 24px;
         }
 
-        .login-form input[type="text"],
-        .login-form input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .login-form button {
+        .login-container button {
             background-color: #00c853; /* Light green */
             color: #fff;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 18px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px;
+            margin-top: 20px;
             width: 100%;
+            max-width: 300px; /* Limiting button width */
         }
 
-        .login-form button:hover {
+        .login-container button:hover {
             background-color: #004d40; /* Dark green on hover */
         }
     </style>
 </head>
 
 <script src="https://cdn.teller.io/connect/connect.js"></script>
-
 
 <body>
     <header>
@@ -180,7 +163,7 @@
 
         <!-- Profile button at the top-right corner -->
         <div class="profile-button" onclick="toggleProfileDropdown()">U</div>
-        
+
         <!-- Profile dropdown menu -->
         <div class="profile-dropdown" id="profileDropdown">
             <a href="/account">Account</a>
@@ -189,12 +172,9 @@
     </header>
 
     <div class="login-container">
-            <!-- <h2>Login</h2> -->
-            <!-- <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required> -->
-            <!-- <button type="submit">Login</button> -->
-            <button type="submit" onclick="openTellerConnect()">Open Teller Connect</button>
-        <!-- </form> -->
+        <h2>Login with your Bank</h2>
+        <p>Securely connect your bank account using Teller</p>
+        <button type="button" onclick="openTellerConnect()">Open Bank Login</button>
     </div>
 
     <script>
@@ -218,7 +198,6 @@
         console.log(API_ID);
         const connectHandler = TellerConnect.setup({
             applicationId: API_ID, // Replace with your Teller app ID
-            // console.log()
             environment: 'sandbox', // Use 'production' for live
             onSuccess: function(auth) {
                 const accessToken = auth.accessToken;
@@ -248,4 +227,5 @@
         }
     </script>
 </body>
+
 </html>
