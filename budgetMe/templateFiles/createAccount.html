@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    <!-- Google Fonts Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body, h1, h2, p, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f8f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #004d40;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            color: #00c853;
+            font-size: 24px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-buttons a {
+            background-color: #00c853;
+            color: #004d40;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #004d40;
+            color: #00c853;
+        }
+
+        .profile-button {
+            position: relative;
+            background-color: #00c853;
+            color: #004d40;
+            border: 2px solid #004d40;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .profile-button:hover {
+            background-color: #004d40;
+            color: #00c853;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #004d40;
+            display: none;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .profile-dropdown a {
+            color: #00c853;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #002b24;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #004d40;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #00c853;
+            color: #004d40;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: #004d40;
+            color: #00c853;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="/" class="logo">BudgetMe</a>
+
+        <div class="nav-buttons">
+            <a href="/breakdown">My Breakdown</a>
+            <a href="/advice">Financial Advice</a>
+        </div>
+
+        <div class="profile-button" onclick="toggleProfileDropdown()">U</div>
+
+        <div class="profile-dropdown" id="profileDropdown">
+            <a href="/account">Account</a>
+            <a href="/settings">Settings</a>
+        </div>
+    </header>
+
+    <main>
+        <h2>Create Account</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Create Account</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 BudgetMe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleProfileDropdown() {
+            const profileDropdown = document.getElementById('profileDropdown');
+            profileDropdown.style.display = profileDropdown.style.display === 'none' || profileDropdown.style.display === '' ? 'block' : 'none';
+        }
+
+        window.onclick = function(event) {
+            const profileDropdown = document.getElementById('profileDropdown');
+            if (!event.target.matches('.profile-button')) {
+                if (profileDropdown.style.display === 'block') {
+                    profileDropdown.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
